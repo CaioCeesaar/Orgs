@@ -49,5 +49,8 @@ class ListaProdutosAdapter(
 
     // retorna o número de itens que o adapter está gerenciando. Pegamos a collection (passada via construtor) e referenciamos o seu tamanho com size
     override fun getItemCount(): Int = produtos.size
+    fun atualiza(produtos: List<Produto>) {
+        TODO("Not yet implemented")
+    }
 
 }
