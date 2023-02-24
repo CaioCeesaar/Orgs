@@ -11,9 +11,14 @@ import com.example.aluraorgs.model.Produto
 
 class ListaProdutosAdapter(
     private val context: Context,
-    private val produtos: List<Produto>
+    produtos: List<Produto>
 ) : RecyclerView.Adapter<ListaProdutosAdapter.ViewHolder>() {
-// foi passado como generics pois é necessário criar uma classe interna para armazenar as referências de views do item
+
+    // não utilizamos diretamente do construtor para manter a referência de uma lista imutável para quem envia para o adapter
+    // produtos será um parâmetro que vem do construtor que podemos manipular livremente
+    private val dataSet = produtos.toMutableList()
+
+    // foi passado como generics pois é necessário criar uma classe interna para armazenar as referências de views do item
 
     // isso é uma inner class, ou seja, uma classe dentro de outra classe
     // fazemos uma extensão da classe RecyclerView.ViewHolder, nessa referência genérica, o construtor dela exige uma View
@@ -43,14 +48,22 @@ class ListaProdutosAdapter(
 
     // Esse método deve atualizar as views do viewholder com os valores apropriados do objeto.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val produto = produtos[position]
+        val produto = dataSet[position]
         holder.vincula(produto)
     }
 
     // retorna o número de itens que o adapter está gerenciando. Pegamos a collection (passada via construtor) e referenciamos o seu tamanho com size
-    override fun getItemCount(): Int = produtos.size
+    override fun getItemCount(): Int = dataSet.size
+
     fun atualiza(produtos: List<Produto>) {
-        TODO("Not yet implemented")
+        // limpa a lista atual de produtos do adapter
+        this.dataSet.clear()
+        // adiciona todos os produtos da nova lista `produtos` à lista atual do adapter `this.produtos`
+        this.dataSet.addAll(produtos)
+        // notifica ao adapter de que houve uma mudança em seus dados, fazendo com que a lista de
+        // exibição (RecyclerView) seja atualizada com os novos dados
+        notifyDataSetChanged()
     }
+
 
 }

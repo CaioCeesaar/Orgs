@@ -2,7 +2,6 @@ package com.example.aluraorgs.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aluraorgs.R
@@ -37,9 +36,7 @@ class ListaProdutosActivity : AppCompatActivity(R.layout.activity_lista_produtos
 
     private fun configuraRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val dao = ProdutosDao()
         recyclerView.adapter = adapter
-        Log.i("MainActivity", "onResume: ${dao.buscaTodos()}")
     }
 
 }
