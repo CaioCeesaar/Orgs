@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Orgs</string>
     <string name="action_button">Action Button</string>
+    <string name="salvar">Salvar</string>
+    <string name="valor">Valor</string>
+    <string name="descri_o">Descrição</string>
+    <string name="nome">Nome</string>
 </resources>

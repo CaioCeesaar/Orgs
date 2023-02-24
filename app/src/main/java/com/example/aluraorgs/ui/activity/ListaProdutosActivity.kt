@@ -3,15 +3,14 @@ package com.example.aluraorgs.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.example.aluraorgs.R
 import com.example.aluraorgs.adapter.ListaProdutosAdapter
 import com.example.aluraorgs.dao.ProdutosDao
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.aluraorgs.databinding.ActivityListaProdutosBinding
 
 
-class ListaProdutosActivity : AppCompatActivity(R.layout.activity_lista_produtos) {
+class ListaProdutosActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityListaProdutosBinding.inflate(layoutInflater) }
     private val dao = ProdutosDao()
     private val adapter = ListaProdutosAdapter(this, dao.buscaTodos())
 
@@ -19,6 +18,7 @@ class ListaProdutosActivity : AppCompatActivity(R.layout.activity_lista_produtos
         super.onCreate(savedInstanceState)
         configuraRecyclerView()
         configuraFab()
+        setContentView(binding.root)
     }
 
     override fun onResume() {
@@ -27,7 +27,7 @@ class ListaProdutosActivity : AppCompatActivity(R.layout.activity_lista_produtos
     }
 
     private fun configuraFab() {
-        val fab = findViewById<FloatingActionButton>(R.id.activity_lista_produtos_floatingActionButton)
+        val fab = binding.activityListaProdutosFloatingActionButton
         fab.setOnClickListener {
             val intent = Intent(this, FormularioProdutoActivity::class.java)
             startActivity(intent)
@@ -35,7 +35,7 @@ class ListaProdutosActivity : AppCompatActivity(R.layout.activity_lista_produtos
     }
 
     private fun configuraRecyclerView() {
-        val recyclerView = findViewById<RecyclerView>(R.id.activity_lista_produtos_recyclerView)
+        val recyclerView = binding.activityListaProdutosRecyclerView
         recyclerView.adapter = adapter
     }
 
